@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 /**
  * An Integer Binary Search Tree
+ *
  * @author: Your Name Here
  * @version: Date
  */
@@ -32,17 +33,19 @@ public class BST {
     /**
      * Prints the provided ArrayList of nodes
      * in the form node1-node2-node3
+     *
      * @param nodes ArrayList of BSTNodes
      */
     public static void printNodes(ArrayList<BSTNode> nodes) {
-        for(int i=0; i<nodes.size()-1; i++) {
+        for (int i = 0; i < nodes.size() - 1; i++) {
             System.out.print(nodes.get(i) + "-");
         }
-        System.out.println(nodes.get(nodes.size()-1));
+        System.out.println(nodes.get(nodes.size() - 1));
     }
 
     /**
      * A function that searches for a value in the tree
+     *
      * @param val integer value to search for
      * @return true if val is in the tree, false otherwise
      */
@@ -50,28 +53,27 @@ public class BST {
         // TODO: Complete the search function
         boolean isValid = search(val, root);
 
-        if(isValid) {
+        if (isValid) {
             return true;
         }
         return false;
 
     }
+
     public boolean search(int val, BSTNode n) {
-        if(n.getVal() == val) {
-            return true;
-        }
-        if(n.getLeft() == null && n.getRight() == null) {
+        if (n == null) {
             return false;
         }
-        if(n.getRight() == null) {
+        if (n.getVal() == val) {
+            return true;
+        }
+        if (val > n.getVal()) {
+            return search(val, n.getRight());
+
+        } else {
             return search(val, n.getLeft());
         }
-        if(n.getLeft() == null) {
-            return search(val, n.getRight());
-        }
-        return search(val, n.getLeft()) || search(val, n.getRight());
     }
-
 
     /**
      * @return ArrayList of BSTNodes in inorder
@@ -84,13 +86,14 @@ public class BST {
 
         return tree;
     }
+
     public void getInorder(ArrayList<BSTNode> a, BSTNode n) {
-        if(n == null) {
+        if (n == null) {
             return;
         }
-        getInorder(a,n.getLeft());
+        getInorder(a, n.getLeft());
         a.add(n);
-        getInorder(a,n.getRight());
+        getInorder(a, n.getRight());
     }
 
     /**
@@ -104,13 +107,14 @@ public class BST {
 
         return tree;
     }
+
     public void getPreorder(ArrayList<BSTNode> a, BSTNode n) {
-        if(n == null) {
+        if (n == null) {
             return;
         }
         a.add(n);
-        getPreorder(a,n.getLeft());
-        getPreorder(a,n.getRight());
+        getPreorder(a, n.getLeft());
+        getPreorder(a, n.getRight());
     }
 
     /**
@@ -125,22 +129,21 @@ public class BST {
         return tree;
 
     }
+
     public void getPostorder(ArrayList<BSTNode> a, BSTNode n) {
-        if(n == null) {
+        if (n == null) {
             return;
         }
-        getPostorder(a,n.getLeft());
-        getPostorder(a,n.getRight());
+        getPostorder(a, n.getLeft());
+        getPostorder(a, n.getRight());
         a.add(n);
     }
-
-
-
 
     /**
      * Inserts the given integer value to the tree
      * if it does not already exist. Modifies the
      * root instance variable to be the root of the new modified tree.
+     *
      * @param val The value ot insert
      */
     public void insert(int val) {
@@ -148,17 +151,17 @@ public class BST {
         insert(false, null, root, val);
 
     }
-    public void insert(boolean isLeft,BSTNode parent,BSTNode n, int val) {
-        if(n == null) {
+
+    public void insert(boolean isLeft, BSTNode parent, BSTNode n, int val) {
+        if (n == null) {
             n = new BSTNode(val);
-            if(isLeft) {
+            if (isLeft) {
                 parent.setLeft(n);
-            }
-            else {
+            } else {
                 parent.setRight(n);
             }
         }
-        if(n.getVal() == val) {
+        if (n.getVal() == val) {
             return;
         }
         if (val > n.getVal()) {
@@ -168,10 +171,10 @@ public class BST {
         insert(true, n, n.getLeft(), val);
     }
 
-
     /**
      * Determines if the current BST is
      * a valid BST.
+     *
      * @return true if valid false otherwise
      */
     public boolean isValidBST() {
