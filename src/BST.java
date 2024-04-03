@@ -51,22 +51,23 @@ public class BST {
      */
     public boolean search(int val) {
         // TODO: Complete the search function
-        boolean isValid = search(val, root);
-
-        if (isValid) {
-            return true;
-        }
-        return false;
+        //
+        return search(val, root);
 
     }
 
     public boolean search(int val, BSTNode n) {
+        // Base Cases
+
+        // If at end of tree false
         if (n == null) {
             return false;
         }
+        // If found val true
         if (n.getVal() == val) {
             return true;
         }
+        // If to the left in tree search left, else return right
         if (val > n.getVal()) {
             return search(val, n.getRight());
 
@@ -78,6 +79,7 @@ public class BST {
     /**
      * @return ArrayList of BSTNodes in inorder
      */
+
     public ArrayList<BSTNode> getInorder() {
         // TODO: Complete inorder traversal
         ArrayList<BSTNode> tree = new ArrayList<BSTNode>();
@@ -88,9 +90,11 @@ public class BST {
     }
 
     public void getInorder(ArrayList<BSTNode> a, BSTNode n) {
+        // If after a leaf return
         if (n == null) {
             return;
         }
+        // recurse left add root recurse right
         getInorder(a, n.getLeft());
         a.add(n);
         getInorder(a, n.getRight());
@@ -112,6 +116,7 @@ public class BST {
         if (n == null) {
             return;
         }
+        //  Add root recurse left recurse right
         a.add(n);
         getPreorder(a, n.getLeft());
         getPreorder(a, n.getRight());
@@ -134,6 +139,7 @@ public class BST {
         if (n == null) {
             return;
         }
+        //   Recurse left recurse right add root
         getPostorder(a, n.getLeft());
         getPostorder(a, n.getRight());
         a.add(n);
